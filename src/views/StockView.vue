@@ -184,7 +184,7 @@ function returnFVComputation (compMethod) {
 
 //function to get the data of this stock including the annual reports, intrinsic values
 function fetchStockData(code) {
-    const url = "./src/stocks/" + code.toLowerCase() + ".json";
+    const url = "./stocks/" + code.toLowerCase() + ".json";
     fetch(url)
         .then(res => res.json())
         .then(data => stock = data)
