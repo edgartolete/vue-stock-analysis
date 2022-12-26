@@ -6,6 +6,7 @@
 }">
     <td class=" p-1 border-solid border border-slate-300">{{ lastUpdate }}</td>
     <td class=" p-1 border-solid border border-slate-300 font-bold">{{ props.stockName }}</td>
+    <td class=" p-1 border-solid border border-slate-300">{{ props.sector }}</td>
     <td class=" p-1 border-solid border border-slate-300" >{{ stock.peTtm }}</td>
     <td class=" p-1 border-solid border border-slate-300">{{ marketPrice.toFixed(2) }}</td>
     <td class=" p-1 border-solid border border-slate-300">{{ returnFVComputation(props.compMethod) }}</td>
@@ -32,8 +33,8 @@
     <td class=" p-1 border-solid border border-slate-300">{{ getPercentText(returnOnAssets3yr) }}</td>
     <td class=" p-1 border-solid border border-slate-300">{{ getPercentText(returnOnAssets5yr) }}</td>
 
-    <td class=" p-1 border-solid border border-slate-300">{{ getPercentText(returnOnInvestedCapital3yr) }}</td>
-    <td class=" p-1 border-solid border border-slate-300">{{ getPercentText(returnOnInvestedCapital5yr) }}</td>
+    <td class=" p-1 border-solid border border-slate-300" :class="(returnOnInvestedCapital3yr < .06)? 'text-red-500' : ''">{{ getPercentText(returnOnInvestedCapital3yr) }}</td>
+    <td class=" p-1 border-solid border border-slate-300" :class="(returnOnInvestedCapital3yr < .06)? 'text-red-500' : ''">{{ getPercentText(returnOnInvestedCapital5yr) }}</td>
 
     <td class=" p-1 border-solid border border-slate-300">{{ debtToEquityRatio3yr.toFixed(2) }}</td>
     <td class=" p-1 border-solid border border-slate-300">{{ debtToEquityRatio5yr.toFixed(2) }}</td>
@@ -71,7 +72,7 @@ import { ref } from "vue";
 
 let stockData = useStockData();
 
-const props = defineProps({ stockName: String, compMethod: String, rating: {type: String, default: "unsure"} })
+const props = defineProps({ stockName: String, compMethod: String, sector: String, rating: {type: String, default: "unsure"} })
 
 let stock = []; //get all stock data
 let reports = ref([]); // annual reports
